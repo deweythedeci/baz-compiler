@@ -6,7 +6,7 @@ void parse(string code){
     peg::parser parser(R"(
 
         # comment
-        comment <- '#' printable* nl
+        comment <- '#' printable* nl / '```' printable* '```'
 
         # characters
         printable <- [\x20-\x7e]
