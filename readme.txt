@@ -103,13 +103,13 @@ Declaration/Assignment
 
 Function Definition
 <type> <func>(<type> <var>, ... );
-    <stmt> ...
+    <stmts>
     return <exp>;
 end;
 
 Void Function
 void <func>(<type> <var>, ... );
-    <stmt> ...
+    <stmts>
     return;
 end;
 
@@ -118,30 +118,35 @@ Function Call
 
 If Statement
 if(<exp>);
-    <stmt> ...
+    <stmts>
 end;
 
 If Else Statement
 if(<exp>);
-    <stmt> ...
+    <stmts>
 else;
-    <stmt> ...
+    <stmts>
 end;
 
 While Loop
 while(<exp>);
-    <stmt> ...
+    <stmts>
 end;
 
 Do While Loop
 dowhile(<exp>);
-    <stmt> ...
+    <stmts>
+end;
+
+For Loop
+for(<type> <var> = <num> .. <num>);
+    <stmts>
 end;
 
 Class Definition
 class <obj>;
     <type> init(<type> <var>, ...);
-        <stmt>
+        <stmts>
     end;
-    <decl> ...
+    <decls>
 end;
