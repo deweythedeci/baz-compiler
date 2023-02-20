@@ -7,8 +7,8 @@
 using namespace std;
 
 int main(int argc, char** argv){
-    if(argc < 2){
-        printf("usage: %s file.code\n", argv[0]);
+    if(argc < 3){
+        printf("usage: %s file.baz file.out\n", argv[0], argv[1]);
         return 1;
     }
     // read from file
