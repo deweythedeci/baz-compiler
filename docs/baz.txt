@@ -1,9 +1,0 @@
-Baz is a "toy" language in the sense that it is intended to be functional but not practical.
-
-The syntax of Baz is intended to be statement based. Every line of code is terminated with a semicolon.
-Blocks are implemented as a start statement and an end statement. This extends to function and class defintions.
-Otherwise, the language is mostly C-like.
-
-Baz is statically-typed and statically-allocated. This means the type and size of variables cannot be altered.
-Baz uses pass-by-value for primitives and pass-by-reference for non-primitives. The primitive data types
-are bool, int, char, and float.
