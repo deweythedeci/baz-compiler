@@ -1,6 +1,8 @@
-This project is still in progress
+This project is still in progress.
 
-This repo contains an implementation for a fictional language "baz"
+This repo contains an implementation for an invented language "baz".
 
-The compiler is implemented in C++ and uses cpp-peglib as a parser\
-https://github.com/yhirose/cpp-peglib
+Dependencies: gcc (>11.3.0), java (>6)
+
+To install, copy the contents of bin/ into the desired path
+To run, execute "./bazc" in the installed directory

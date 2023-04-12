@@ -1,0 +1,16 @@
+This file is for documenting the compiler's design.
+
+This compiler is incredibly simple and largely sacrifices performance.
+The compiler performs no optimization on the source code.
+
+The compilations is done in 
+1. Scanning
+2. Parsing
+3. AST generation
+4. Error checking
+5. CFG generation
+6. Assembly generation
+7. Binary generation
+
+Scanning and parsing is done using ANTLR
+Binary generation is done using GCC Assembler
