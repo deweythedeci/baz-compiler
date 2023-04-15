@@ -1,5 +1,7 @@
 // Expression class and subclasses
+// Used in AST representation
 
+// An expression has a type T that it 
 template <typename T>
 class Exp{
     T val;

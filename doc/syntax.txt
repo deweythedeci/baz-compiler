@@ -1,6 +1,3 @@
-THIS IS OUT OF DATE
-SEE BAZ.TXT
-
 Naming Constraints
 Must fit pattern
 {a..z A..Z _} {a..z A..Z 0..9 _}*
@@ -11,16 +8,16 @@ Types
 int - integer
 float - floating point number
 char - character
+bool - boolean
 <type>[] - array
-<type>$ - pointer
 
 Comments
 # comment
 <stmt> # comment
 ``` comment block ```
 
-Built-in Functions
-print(), length()
+Wrapper Functions
+$<syscall>(<args>)
 
 Command Line Arguments
 args[]
@@ -80,9 +77,6 @@ Unary Plus/Minus
 - <exp>
 Logical Not
 ! <exp>
-Pointer Reference/Dereference
-$ <exp>
-@ <exp>
 
 Level 8
 Parentheses
@@ -91,8 +85,6 @@ Function Call
 <func> ( <exp> )
 Array Access
 <var> [ <exp> ]
-New Class
-new <obj>(<exp>, ... )
 Member Access
 <obj> . <var>
 Primitives
@@ -101,8 +93,16 @@ Primitives
 
 Declaration/Assignment
 <type> <var>;
-<var> = <exp>;
 <type> <var> = <exp>;
+<var> = <exp>;
+
+Array Declaration
+<type> <var>[<exp>];
+<type> <var>[] = {<exp>, <exp>, <exp>};
+
+Object Declaration
+<type> var;
+<type> var = {<exp>, <exp>, <exp>};
 
 Function Definition
 <type> <func>(<type> <var>, ... );
@@ -142,14 +142,11 @@ dowhile(<exp>);
 end;
 
 For Loop
-for(<type> <var> = <num> .. <num>);
+for(<stmt>;<stmt>;<stmt>);
     <stmts>
 end;
 
 Class Definition
 class <obj>;
-    <type> init(<type> <var>, ...);
-        <stmts>
-    end;
     <decls>
 end;

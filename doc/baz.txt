@@ -1,11 +1,28 @@
 This file is for documenting the language's design.
 
 Baz is a "toy" language in the sense that it is intended to be functional but not practical.
+The main goal is to make Baz as simple as possible to it is easy to compile.
+Baz is also intended be usable, and have a reasonable workaround for missing features.
 
 The syntax of Baz is intended to be statement based. Every line of code is terminated with a semicolon.
 Blocks are implemented as a start statement and an end statement. This extends to function and class defintions.
 Otherwise, the language is mostly C-like.
 
-Baz is statically-typed and statically-allocated. This means the type and size of variables cannot be altered.
-Baz uses pass-by-value for primitives and pass-by-reference for non-primitives. The primitive data types
-are bool, int, char, and float.
+### Typing ###
+Baz is statically-typed. Each variable has its type declared at its creation, and it cannot be changed.
+Within Baz the primitive data types are int, float, bool, and char.
+Semantically, bools and chars are a special case of int and have the same binary represenation.
+Bools are integers, but are displayed as "false" if they are 0 and "true" if they are not.
+Chars are integers, but they are displayed as the corresponding ascii character.
+Otherwise, they are functionally equivalent and can be used interchangably.
+If you mix ints bools or chars, the resulting expression will always be an int.
+
+### Memory Management ###
+Baz is statically-allocated, and only has a local scope.
+So, a variables scope is from it's declaration till the function's end.
+Additionally, arrays are fixed in size, and must be declared when they are created.
+
+### Pass by value or reference ####
+Baz uses pass-by-value for primitives and pass-by-reference for non-primitives.
+
+Bools are ints that are either 0 or 1, and chars are ints that are displayed in ASCII.
