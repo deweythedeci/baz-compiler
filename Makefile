@@ -23,7 +23,7 @@ OBJS = $(patsubst $(SRCDIR)/%.cpp,$(BUILDDIR)/%.o,$(SRCS))
 
 # make rules
 $(PARSETREE): $(LEXER) $(PARSER)
-	antlr4 -Dlanguage=Cpp -visitor -o $(ANTLRDIR) -package parse $(PARSER)
+	antlr4 -Dlanguage=Cpp -visitor -o $(ANTLRDIR) -package parse -no-listener $(PARSER)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@
