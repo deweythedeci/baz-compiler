@@ -1,28 +1,64 @@
 This file is for documenting the language's design.
 
 Baz is a "toy" language in the sense that it is intended to be functional but not practical.
-The main goal is to make Baz as simple as possible to it is easy to compile.
+The main goal is to make Baz as simple as possible for compiling.
 Baz is also intended be usable, and have a reasonable workaround for missing features.
 
+### Syntax ###
 The syntax of Baz is intended to be statement based. Every line of code is terminated with a semicolon.
 Blocks are implemented as a start statement and an end statement. This extends to function and class defintions.
 Otherwise, the language is mostly C-like.
 
 ### Typing ###
 Baz is statically-typed. Each variable has its type declared at its creation, and it cannot be changed.
-Within Baz the primitive data types are int, float, bool, and char.
-Semantically, bools and chars are a special case of int and have the same binary represenation.
-Bools are integers, but are displayed as "false" if they are 0 and "true" if they are not.
-Chars are integers, but they are displayed as the corresponding ascii character.
-Otherwise, they are functionally equivalent and can be used interchangably.
-If you mix ints bools or chars, the resulting expression will always be an int.
+Within Baz the primitive data types are: bool, char, int, long, real.
+
+Primitive types in Baz can be used interchangably as there is implicit type conversion.
+The rank order for type conversion is: bool, char, int, long, real.
+If differing types are mixed (e.g. false + 1.0) the subexpression will be converted to the highest rank type.
+Converted bools become 0 for false and 1 for true.
+Converted chars become their ASCII representation.
+
+Additionally, there are two non-primitive data types: classes and arrays.
+Classes are user-defined types comprised of one or more variables (fields).
+However, classes do not have methods associated with them.
+Arrays are a sequence of variables that are all the same type.
+
+An array's base type can be any data type including classes and arrays.
+Arrays are considered to have the same type if their base types are the same.
+
+### Scope ###
+Baz supports a global and local scope.
+A scope is the duration for which a variable's name can be referenced.
+
+Global variables are defined outside of any blocks and must be initialized to a constant value.
+These variables have a scope that covers for the entirety of the program's runtime.
+
+A local variable is a variable declared inside of a block: function, block, if, loop.
+A local variable's scope is from its declaration to the end of its respective block.
 
 ### Memory Management ###
-Baz is statically-allocated, and only has a local scope.
-So, a variables scope is from it's declaration till the function's end.
-Additionally, arrays are fixed in size, and must be declared when they are created.
-
-### Pass by value or reference ####
 Baz uses pass-by-value for primitives and pass-by-reference for non-primitives.
+Technically, all values in Baz are pass-by-value, and non-primitives are represented as pointers.
 
-Bools are ints that are either 0 or 1, and chars are ints that are displayed in ASCII.
+A lifetime is the duration for which a non-primitive is allocated in memory.
+A variable's lifetime starts at its declaration and ends when either
+the variable is reassigned, or its scope ends and is not returned.
+
+### Built-in Functions ###
+Built-in functions are functions that are coded into the compiler, and allow for features not possible in Baz.
+There is a singluar low-level built-in wrapper function in Baz, syscall.
+long syscall(long id, long[] args) - makes a system call
+    id - specifies the system call to make
+    args - the parameters of the call
+    return - the system calls return value
+All other functionalities are coded in the standard library using syscall.
+
+### Unassigned Variables ###
+When declaring a variable you can be specified with or without a starting value.
+When this is done the variable is set to a default value.
+Default values:
+    bool - false
+    char - null character
+    int, long, real - 0
+    array, class - elements are defaulted
