@@ -1,18 +1,20 @@
 # compiler settings
 CC = g++
-CFLAGS = -Wall -std=c++11
+CFLAGS = -Wall
+LDFLAGS = -static -lantlr4-runtime
 
 # directory paths
 SRCDIR = src
 INCDIR = include
 BUILDDIR = build
 BINDIR = bin
+LIBDIR = lib
 ANTLRDIR = antlr
 
 # grammar names
 LEXER = $(ANTLRDIR)/BazLexer.g4
 PARSER = $(ANTLRDIR)/Baz.g4
-PARSETREE = $(addprefix $(ANTLRDIR)/antlr, BazLexer.h BazParser.h BazVisitor.h BazLexer.cpp  BazParser.cpp  BazVisitor.cpp)
+PARSETREE = $(addprefix $(ANTLRDIR)/antlr/, BazLexer.h BazParser.h BazVisitor.h BazLexer.cpp  BazParser.cpp  BazVisitor.cpp)
 
 # executable name
 EXECNAME = bazc
@@ -22,14 +24,16 @@ SRCS = $(wildcard $(SRCDIR)/*.cpp)
 OBJS = $(patsubst $(SRCDIR)/%.cpp,$(BUILDDIR)/%.o,$(SRCS))
 
 # make rules
+all: $(BINDIR)/$(EXECNAME)
+
 $(PARSETREE): $(LEXER) $(PARSER)
 	antlr4 -Dlanguage=Cpp -visitor -o $(ANTLRDIR) -package parse -no-listener $(PARSER)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
-	$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(INCDIR) -I$(INCDIR)/antlr4-runtime/ -c $< -o $@
 
 $(BINDIR)/$(EXECNAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@
+	$(CC) $(CFLAGS) -L$(LIBDIR) $(OBJS) $(LDFLAGS) -o $@
 
 # clean rule
 clean:

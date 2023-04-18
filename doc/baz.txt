@@ -47,12 +47,16 @@ the variable is reassigned, or its scope ends and is not returned.
 
 ### Built-in Functions ###
 Built-in functions are functions that are coded into the compiler, and allow for features not possible in Baz.
-There is a singluar low-level built-in wrapper function in Baz, syscall.
-long syscall(long id, long[] args) - makes a system call
-    id - specifies the system call to make
-    args - the parameters of the call
-    return - the system calls return value
-All other functionalities are coded in the standard library using syscall.
+There are 6 built-in functions in Baz: print, input, open, read, write, exit.
+
+void print(char[] text) - prints text
+char[] input(int n) - reads up to n bytes
+long open(char[] file) - opens a file
+char[] read(long file, int n) - reads from a file
+void write(long file, char[] text) - writes to a file
+void exit(int status) - exits the program
+
+All other functionalities are coded in the standard library.
 
 ### Unassigned Variables ###
 When declaring a variable you can be specified with or without a starting value.

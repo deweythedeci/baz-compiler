@@ -73,13 +73,12 @@ DOWHILE: 'dowhile' WS* -> skip;
 WHILE: 'while' WS* -> skip;
 FOR: 'for' WS* -> skip;
 CLASS: 'class' WS* -> skip;
-SYSCALL: 'syscall' WS* -> skip;
 
 // escape sequence
 ESCSEQ: BSLASH ([\\'"] | ESCLINE | ESCTAB | ESCRET);
-ESCLINE: 'n' { return '\n'; };
-ESCTAB: 't' { return '\t'; };
-ESCRET: 'r' { return '\r'; };
+ESCLINE: 'n' { setText("\n"); };
+ESCTAB: 't' { setText("\t"); };
+ESCRET: 'r' { setText("\r"); };
 
 // tokens
 INTLIT: DIGIT+ WS*;
