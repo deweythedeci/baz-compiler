@@ -71,7 +71,7 @@ exp: exp OR exp
     | exp BITXOR exp
     | exp EQUAL exp | exp NOTEQUAL exp
     | exp LESS exp | exp GREATER exp | exp LESSEQ exp | exp GREATEREQ exp
-    | exp BITLSHIFT exp | exp BITRSHIFT
+    | exp BITLSHIFT exp | exp BITRSHIFT exp
     | exp ADD exp | exp SUBTRACT exp
     | exp MULTIPLY exp | exp DIVIDE exp | exp MODULUS exp
     | ADD exp | SUBTRACT exp | NOT exp | BITNOT exp
