@@ -6,7 +6,7 @@ program: (funcblock | classblock | decl EOS)*;
 
 // function definition
 funcblock: func EOS stmtlist end EOS;
-func: rettype NAME OPAREN arg (COMMA arg)*? CPAREN;
+func: rettype NAME OPAREN (arg (COMMA arg)*)? CPAREN;
 arg: type NAME;
 rettype: type | VOID;
 

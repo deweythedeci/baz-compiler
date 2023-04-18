@@ -2,7 +2,7 @@ Naming Constraints
 Must fit pattern
 {a..z A..Z _} {a..z A..Z 0..9 _}*
 Disallowed Names
-int, float, char, end, if, else, while, dowhile, void, null, return, new, class, print
+bool, char, int, long, real, true, false, void, return, block, end, if, else, dowhile, while, for, break, class
 
 Types
 bool - boolean

@@ -29,7 +29,7 @@ all: $(BINDIR)/$(EXECNAME)
 $(PARSETREE): $(LEXER) $(PARSER)
 	antlr4 -Dlanguage=Cpp -visitor -o $(ANTLRDIR) -package parse -no-listener $(PARSER)
 
-$(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
+$(BUILDDIR)/%.o: $(SRCDIR)/%.cpp $(PARSETREE)
 	$(CC) $(CFLAGS) -I$(INCDIR) -I$(INCDIR)/antlr4-runtime/ -c $< -o $@
 
 $(BINDIR)/$(EXECNAME): $(OBJS)

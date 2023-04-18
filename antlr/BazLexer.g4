@@ -1,5 +1,21 @@
 lexer grammar Baz;
 
+@members {
+    bool isKeyword(const std::string& s) {
+        std::unordered_set<std::string> keywords {
+            "bool", "char", "int", "long", "real", "true", "false", "void", "return", "block", "end", "if", "else", "dowhile", "while", "for", "break", "class"
+        };
+        return keywords.count(s) > 0;
+    }
+}
+
+// tokens
+INTLIT: DIGIT+ WS*;
+REALLIT: (DIGIT+ '.' DIGIT* | DIGIT* '.' DIGIT+) WS*;
+CHARLIT: SQUOTE (~('\''|'\\') | ESCSEQ) SQUOTE WS*;
+STRINGLIT: DQUOTE (~('"'|'\\') | ESCSEQ)* DQUOTE WS*;
+NAME: (DIGIT | UNDERSCORE) (DIGIT | LETTER | UNDERSCORE)* WS* { if(isKeyword(getText())) skip(); };
+
 // character classes
 fragment DIGIT: [0-9];
 fragment LETTER: [a-zA-Z];
@@ -79,10 +95,3 @@ ESCSEQ: BSLASH ([\\'"] | ESCLINE | ESCTAB | ESCRET);
 ESCLINE: 'n' { setText("\n"); };
 ESCTAB: 't' { setText("\t"); };
 ESCRET: 'r' { setText("\r"); };
-
-// tokens
-INTLIT: DIGIT+ WS*;
-REALLIT: (DIGIT+ '.' DIGIT* | DIGIT* '.' DIGIT+) WS*;
-CHARLIT: SQUOTE (~('\''|'\\') | ESCSEQ) SQUOTE WS*;
-STRINGLIT: DQUOTE (~('"'|'\\') | ESCSEQ)* DQUOTE WS*;
-NAME: (DIGIT | UNDERSCORE) (DIGIT | LETTER | UNDERSCORE)* WS*;
