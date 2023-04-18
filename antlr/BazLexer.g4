@@ -49,6 +49,7 @@ CBRACE: '}' WS*;
 OPAREN: '(' WS* -> skip;
 CPAREN: ')' WS* -> skip;
 COMMA: ',' WS* -> skip;
+COLON: ':' WS* -> skip;
 EOS: ';' WS* -> skip;
 
 // keywords

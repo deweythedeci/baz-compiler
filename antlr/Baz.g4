@@ -52,7 +52,7 @@ dowhile: DOWHILE OPAREN exp CPAREN;
 
 // for block
 forblock: for EOS stmtlist end;
-for: FOR OPAREN stmt EOS stmt EOS stmt CPAREN;
+for: FOR OPAREN NAME COLON exp CPAREN;
 
 // control statements
 block: BLOCK;
@@ -78,9 +78,8 @@ exp: exp OR exp
     | OPAREN exp CPAREN
     | NAME OPAREN exp CPAREN | exp ACCESS exp | exp OBRACK exp CBRACK
     | OBRACE exp (COMMA exp)* CBRACE
-    | literal
+    | boollit | charlit | intlit | reallit | stringlit
     | variable;
-literal: boollit | charlit | intlit | reallit | stringlit;
 
 // literals
 boollit: FALSE | TRUE;

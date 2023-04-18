@@ -152,7 +152,7 @@ dowhile(<exp>);
 end;
 
 For Loop
-for(<stmt>;<stmt>;<stmt>);
+for(<name> : <exp>);
     <stmts>
 end;
 
