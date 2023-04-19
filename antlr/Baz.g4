@@ -30,7 +30,7 @@ stmt: decl
 decl: type variable arrdecl?
     | type variable ASSIGN exp;
 arrdecl: (CBRACK exp OBRACK)+;
-assign: exp (COMMA exp)* ASSIGN exp;
+assign: exp ASSIGN exp;
 
 // function call
 callstmt: exp;
@@ -58,7 +58,7 @@ for: FOR OPAREN NAME COLON exp CPAREN;
 block: BLOCK;
 break: BREAK;
 end: END;
-return: RETURN (exp (COMMA exp)*)?;
+return: RETURN exp;
 
 // lists
 stmtlist: (stmt EOS)*;

@@ -1,0 +1,3 @@
+# syntactically correct file to test parser
+
+int var_name = 3;

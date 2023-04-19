@@ -9,17 +9,17 @@ lexer grammar Baz;
     }
 }
 
+// character classes
+fragment DIGIT: [0-9];
+fragment LETTER: [a-zA-Z];
+fragment UNDERSCORE: '_';
+
 // tokens
 INTLIT: DIGIT+ WS*;
 REALLIT: (DIGIT+ '.' DIGIT* | DIGIT* '.' DIGIT+) WS*;
 CHARLIT: SQUOTE (~('\''|'\\') | ESCSEQ) SQUOTE WS*;
 STRINGLIT: DQUOTE (~('"'|'\\') | ESCSEQ)* DQUOTE WS*;
 NAME: (DIGIT | UNDERSCORE) (DIGIT | LETTER | UNDERSCORE)* WS* { if(isKeyword(getText())) skip(); };
-
-// character classes
-fragment DIGIT: [0-9];
-fragment LETTER: [a-zA-Z];
-fragment UNDERSCORE: '_';
 
 // white space
 WS: [ \t\r\n]+ -> skip;
