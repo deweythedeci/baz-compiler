@@ -104,7 +104,7 @@ Array Declaration
 
 Object Declaration
 <type> var;
-<type> var = {<exp>, ... };
+<type> var = <type>{<exp>, ... };
 
 Function Definition
 <type> <func>(<type> <var>, ... );

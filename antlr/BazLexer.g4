@@ -15,20 +15,17 @@ fragment LETTER: [a-zA-Z];
 fragment UNDERSCORE: '_';
 
 // tokens
-INTLIT: DIGIT+ WS*;
+STRINGLIT: DQUOTE (~('"'|'\\') | ESCSEQ)* DQUOTE WS*;
+NAME: (LETTER | UNDERSCORE) (DIGIT | LETTER | UNDERSCORE)* WS* { if(isKeyword(getText())) skip(); };
 REALLIT: (DIGIT+ '.' DIGIT* | DIGIT* '.' DIGIT+) WS*;
 CHARLIT: SQUOTE (~('\''|'\\') | ESCSEQ) SQUOTE WS*;
-STRINGLIT: DQUOTE (~('"'|'\\') | ESCSEQ)* DQUOTE WS*;
-NAME: (DIGIT | UNDERSCORE) (DIGIT | LETTER | UNDERSCORE)* WS* { if(isKeyword(getText())) skip(); };
+INTLIT: DIGIT+ WS*;
 
-// white space
-WS: [ \t\r\n]+ -> skip;
-EOL: '\r'? '\n' -> skip;
-
-// special chars
-SQUOTE: '\'';
-DQUOTE: '"';
-BSLASH: '\\';
+// escape sequence
+ESCSEQ: BSLASH ([\\'"] | ESCLINE | ESCTAB | ESCRET);
+ESCLINE: 'n' { setText("\n"); };
+ESCTAB: 't' { setText("\t"); };
+ESCRET: 'r' { setText("\r"); };
 
 // comments
 SCOMMENT: '#' ~[\r\n]* (EOL | EOF) WS* -> skip;
@@ -90,8 +87,11 @@ WHILE: 'while' WS* -> skip;
 FOR: 'for' WS* -> skip;
 CLASS: 'class' WS* -> skip;
 
-// escape sequence
-ESCSEQ: BSLASH ([\\'"] | ESCLINE | ESCTAB | ESCRET);
-ESCLINE: 'n' { setText("\n"); };
-ESCTAB: 't' { setText("\t"); };
-ESCRET: 'r' { setText("\r"); };
+// white space
+WS: [ \t\r\n]+ -> skip;
+EOL: '\r'? '\n' -> skip;
+
+// special chars
+SQUOTE: '\'';
+DQUOTE: '"';
+BSLASH: '\\';

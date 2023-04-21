@@ -32,7 +32,14 @@ int main(int argc, char** argv){
     // visit parse tree
     antlr4::tree::ParseTree* tree = parser.program();
     parse::PrintVisitor visitor;
+    std::cout << std::string(10, '-') << "parser" << std::string(10, '-') << std::endl;
     tree->accept(&visitor);
+
+    std::cout << std::string(10, '-') << "lexer" << std::string(10, '-') << std::endl;
+    for (auto token : tokens.getTokens()) {
+        std::string tokenName = lexer.getVocabulary().getDisplayName(token->getType());
+        std::cout << "Token: " << tokenName << ", Text: " << token->getText() << std::endl;
+    }
 
     return 0;
 }
