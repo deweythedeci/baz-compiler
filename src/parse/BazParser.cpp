@@ -1,5 +1,5 @@
 
-// Generated from antlr/Baz.g4 by ANTLR 4.12.0
+// Generated from antlr/Baz.g4 by ANTLR 4.13.0
 
 
 #include "BazVisitor.h"
@@ -38,10 +38,19 @@ struct BazParserStaticData final {
 };
 
 ::antlr4::internal::OnceFlag bazParserOnceFlag;
+#if ANTLR4_USE_THREAD_LOCAL_CACHE
+static thread_local
+#endif
 BazParserStaticData *bazParserStaticData = nullptr;
 
 void bazParserInitialize() {
+#if ANTLR4_USE_THREAD_LOCAL_CACHE
+  if (bazParserStaticData != nullptr) {
+    return;
+  }
+#else
   assert(bazParserStaticData == nullptr);
+#endif
   auto staticData = std::make_unique<BazParserStaticData>(
     std::vector<std::string>{
       "program", "funcblock", "func", "arg", "rettype", "classblock", "class", 
@@ -3557,5 +3566,9 @@ bool BazParser::expSempred(ExpContext *_localctx, size_t predicateIndex) {
 }
 
 void BazParser::initialize() {
+#if ANTLR4_USE_THREAD_LOCAL_CACHE
+  bazParserInitialize();
+#else
   ::antlr4::internal::call_once(bazParserOnceFlag, bazParserInitialize);
+#endif
 }
